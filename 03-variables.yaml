@@ -5,10 +5,11 @@
     Duration: "one week"
 
   tasks:
-  - name : checking the varibales
-    vars: 
-     tool_name: "AWS"
-     Duration: "4 weeks"
-    ansible.builtin.debug:
-      msg: "Hi, This is the prcticing of tools {{tool_name}}, for which it will take time {{Duration}}"
+  - name: override variables
+    set_fact:
+      tool_name: "AWS"
+      Duration: "4 weeks"
 
+  - name : checking the variables
+    ansible.builtin.debug:
+      msg: "Hi, This is the practicing of tools {{tool_name}}, for which it will take time {{Duration}}"
