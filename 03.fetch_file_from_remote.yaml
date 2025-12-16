@@ -1,0 +1,14 @@
+---
+- name: To fetch the files from remote servers
+  hosts: all
+  become: yes
+  tasks: 
+    - name: check the files in the remote server
+      command:
+        "cat /etc/passwd" 
+
+    - name: fetch the files from that location
+      fetch: 
+         src: /etc/passwd
+         dest: /home/ec2-user/userfile_{{ inventory_hostname }}
+         flat: yes   
