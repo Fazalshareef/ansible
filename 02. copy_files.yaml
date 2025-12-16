@@ -1,0 +1,14 @@
+---
+- name: copy files from controler to remote server
+  hosts: all
+  become: yes
+  tasks: 
+  - name: 
+    file:
+      path: /home/ec2-user/ansible_test
+      state: directory
+
+  - name:
+    copy:
+      src: /home/ec2-user/10.0.4.54_messages
+      dest: /home/ec2-user/ansible_test
