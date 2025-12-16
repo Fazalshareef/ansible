@@ -1,6 +1,7 @@
 ---
 - name: insatll and start nginx
   hosts: all
+  become:yes
   tasks:
     - name: Install nginx
       yum: 
