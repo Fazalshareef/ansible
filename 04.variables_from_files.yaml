@@ -1,8 +1,0 @@
-- name : variable script
-  hosts: node
-  vars_files:
-  - variables.yaml
-  tasks:
-  - name : checking the variables
-    ansible.builtin.debug:
-      msg: "Hi, This is the practicing of {{ course }} by using tools {{ tool_name }}, for which it will take time {{ duration }}"

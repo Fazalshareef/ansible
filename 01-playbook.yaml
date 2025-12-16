@@ -1,6 +1,0 @@
-- name: ping playbook
-  hosts: node
-  gather_facts: no
-  tasks:
-    - name: ping the server
-      ansible.builtin.ping:
