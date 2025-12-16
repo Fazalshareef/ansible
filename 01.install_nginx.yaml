@@ -1,0 +1,14 @@
+---
+- name: insatll and start nginx
+  host: all
+  task:
+    - name: Install nginx
+      yum: 
+        name: nginx
+        state: present
+
+    - name: Start and enable nginx
+      service: 
+        name: nginx
+        state: started
+        enabled: yes         
