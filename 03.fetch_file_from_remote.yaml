@@ -4,8 +4,8 @@
   become: yes
   tasks: 
     - name: check the files in the remote server
-      command:
-        "cat /etc/passwd" 
+      command: cat /etc/passwd
+        
 
     - name: fetch the files from that location
       fetch: 
