@@ -1,0 +1,14 @@
+---
+- name: To create a file and change the permissions
+  hosts: all
+  become: yes
+  tasks:
+    - name: file create
+      file:
+       path: /home/ec2-user/test_file
+       state: touch 
+
+    - name: change the permissions
+      file:
+       path: /home/ec2-user/test_file
+       mode: 0644  
