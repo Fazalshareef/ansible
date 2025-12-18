@@ -5,14 +5,11 @@
    tasks:
     - name: creating the file in the remote servers
       ansible.builtin.file:
-        path: /home/ec2-user/test_file_1.yaml
+        path: /etc/test_file_1.yaml
         state: touch
 
     - name: copying file from one loaction to another location
       ansible.builtin.copy:
-        src: /home/ec2-user/test_file_1.yaml
+        src: /etc/test_file_1.yaml
         dest: /tmp/test_file_1.yaml
         remote_src: yes
-
-        
-             
