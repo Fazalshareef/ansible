@@ -3,11 +3,11 @@
   hosts: all
   become: yes
   tasks:
-    name: install the important packages
-    ansible.builtin.package:
+   - name: install the important packages
+     ansible.builtin.package:
       name: "{{ item }}"
       state: present
-    loop:
+     loop:
       - vim
       - git
       - nginx
