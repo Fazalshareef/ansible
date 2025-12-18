@@ -1,0 +1,15 @@
+---
+ - name: praticing the loop
+   hosts: all
+   become: yes
+   tasks:
+     name: install the important packages
+     ansible.builtin.package:
+       name: "{{ item }}"
+       state: present
+     loop:
+       - vim
+       - git
+       - nginx
+       - htop
+       - curl
