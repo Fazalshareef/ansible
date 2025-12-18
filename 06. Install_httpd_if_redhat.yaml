@@ -15,5 +15,5 @@
     - name: start the service
       ansible.builtin.service:
         name: "{{ package_name }}"
-        state: started
+        state: restarted
       when: ansible_os_family == "RedHat"  
