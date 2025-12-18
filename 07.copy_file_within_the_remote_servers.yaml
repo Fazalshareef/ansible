@@ -11,5 +11,5 @@
     - name: copying file from one loaction to another location
       ansible.builtin.copy:
         src: /etc/test_file_1.yaml
-        dest: /tmp/test_file_1.yaml
+        dest: /tmp/.
         remote_src: yes
