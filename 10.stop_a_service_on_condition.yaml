@@ -1,0 +1,16 @@
+---
+- name: checking the service status and stop the service on condition
+  hosts: all
+  become: yes
+  tasks:
+    - name: checking the service facts
+      ansible.builtin.service_facts:  #gathering the service facts directly
+
+          
+    - name: stopping the service on facts bases
+      ansible.builtin.service:
+       name: nginx
+       state: started
+      when: 
+       - ansible_facts.services['nginx.service'] is defined # In Ansible, if you try to check the state of nginx.service on a server where Nginx isn't even installed, the playbook will crash with an "undefined" error.
+       - ansible_facts.services['nginx.service'].state == 'stopped'   # checking service facts and mentioning the specifci service + state of service     

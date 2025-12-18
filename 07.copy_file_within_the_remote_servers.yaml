@@ -1,0 +1,21 @@
+---
+ - name: copy the files with in the remote servers
+   hosts: all
+   become: yes
+   tasks:
+    - name: creating the file in the remote servers
+      ansible.builtin.file:
+        path: /etc/test_file_1.txt
+        state: touch
+
+    - name: storing some info in the file
+      ansible.builtin.lineinfile:
+        path: /etc/test_file_1.txt
+        line: "this is the info adding in the file"
+        create: yes
+
+    - name: copying file from one loaction to another location
+      ansible.builtin.copy:
+        src: /etc/test_file_1.txt
+        dest: /tmp/test_file_1_copy.txt
+        remote_src: yes

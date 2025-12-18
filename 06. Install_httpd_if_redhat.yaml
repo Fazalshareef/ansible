@@ -1,0 +1,19 @@
+---
+- name : install
+  hosts: all
+  become: yes
+
+  vars: 
+    package_name: httpd
+  tasks:
+    - name: install the httpd
+      ansible.builtin.package:
+        name: "{{ package_name }}"
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: start the service
+      ansible.builtin.service:
+        name: "{{ package_name }}"
+        state: restarted
+      when: ansible_os_family == "RedHat"  
