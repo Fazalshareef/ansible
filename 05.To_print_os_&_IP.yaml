@@ -1,10 +1,11 @@
 ---
-- name : to print the os details and ip
-  hosts: all
-  become: yes
-  tasks: 
-  - name: To print the os details
-    shell: cat /etc/os-release | grep os
-
-  - name: to print the ip details
-    shell: ip a | grep inet && ifconfig
+ - name : To display the os and ip deatils
+   hosts: all
+   tasks:
+     - name : To print all the deatils
+       ansible.buildin.debug:
+       msg: 
+         - "Operating System: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+         - "Major Release: {{ ansible_distribution_major_version }}"
+         - "Primary IP: {{ ansible_default_ipv4.address }}"
+         - "OS Family: {{ ansible_os_family }}"
