@@ -8,7 +8,7 @@
 
           
     - name: stopping the service on facts bases
-      ansibel.builtin.service:
+      ansible.builtin.service:
        name: nginx
        state: stopped
       when: 
