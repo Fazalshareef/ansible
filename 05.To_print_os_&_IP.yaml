@@ -1,0 +1,10 @@
+---
+- name : to print the os details and ip
+  hosts: all
+  became: yes
+  tasks: 
+  - name: To print the os details
+    command: cat /etc/os-release
+
+  - name: to print the ip details
+    shell: ip a | grep inet && ifconfig
