@@ -1,7 +1,7 @@
 ---
 - name : to print the os details and ip
   hosts: all
-  became: yes
+  become: yes
   tasks: 
   - name: To print the os details
     command: cat /etc/os-release
