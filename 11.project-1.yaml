@@ -1,0 +1,58 @@
+---
+- name: Git to Master and Push to Remote workflow
+  hosts: all
+  become: yes
+  tasks: 
+    - name: Gathering service facts
+      ansible.builtin.service_facts:
+
+    - name: Show the service state
+      ansible.builtin.debug:
+        msg: "The state of nginx is {{ ansible_facts.services['nginx.service'].state }}"
+      when: ansible_facts.services['nginx.service'] is defined
+
+    # --- MASTER SERVER TASKS ---
+    - name: Installing git on the control host (Master)
+      delegate_to: localhost
+      run_once: true
+      become: yes
+      ansible.builtin.package: 
+        name: git
+        state: present
+
+    - name: Clone repo to the master server
+      delegate_to: localhost
+      run_once: true
+      become: no 
+      ansible.builtin.git: 
+        repo: 'https://github.com/Fazalshareef/sample-website.git' 
+        dest: /tmp/master_git_repo  # <--- Path defined here
+        version: main
+
+    # --- REMOTE SERVER TASKS ---
+    - name: Load variables based on OS
+      ansible.builtin.include_vars: "vars/{{ ansible_os_family }}.yml"  
+
+    - name: Deploy only the index.html file
+      ansible.builtin.copy:
+        src: /tmp/master_git_repo/index.html # <--- Path matched here
+        dest: "{{ web_path }}/index.html"
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Restart Web Service
+
+  # --- OPTIONAL CLEANUP ---
+  post_tasks:
+    - name: Cleanup Master Server temporary files
+      delegate_to: localhost
+      run_once: true
+      ansible.builtin.file:
+        path: /tmp/master_git_repo
+        state: absent
+
+  handlers:
+    - name: Restart Web Service
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
