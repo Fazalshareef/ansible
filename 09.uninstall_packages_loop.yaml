@@ -13,6 +13,7 @@
         - nginx
         - htop
         - curl
+        - httpd
       ignore_errors: yes
       loop_control: 
        label: Uninstalling the packages {{ item }}
