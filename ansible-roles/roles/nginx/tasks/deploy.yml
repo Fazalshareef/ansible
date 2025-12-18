@@ -1,0 +1,14 @@
+- name: Fetch website code on control node
+  git:
+    repo: https://github.com/Fazalshareef/sample-website.git
+    dest: /tmp/nginx_code
+    version: main
+    force: yes
+  delegate_to: localhost
+  run_once: true
+
+- name: Deploy website to nginx servers
+  copy:
+    src: /tmp/nginx_code/
+    dest: /usr/share/nginx/html/
+
