@@ -16,3 +16,4 @@
       ansible.builtin.service:
         name: "{{ package_name }}"
         state: started
+      when: ansible_os_family == "RedHat"  
