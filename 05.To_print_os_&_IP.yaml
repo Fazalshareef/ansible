@@ -1,11 +1,12 @@
 ---
- - name : To display the os and ip deatils
-   hosts: all
-   tasks:
-     - name : To print all the deatils
-       ansible.builtin.debug:
-       msg: 
-         - "Operating System: {{ ansible_distribution }} {{ ansible_distribution_version }}"
-         - "Major Release: {{ ansible_distribution_major_version }}"
-         - "Primary IP: {{ ansible_default_ipv4.address }}"
-         - "OS Family: {{ ansible_os_family }}"
+- name: To display the os and ip details
+  hosts: all
+  tasks:
+    - name: To print all the details
+      ansible.builtin.debug:
+        msg: 
+          - "Operating System: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+          - "Major Release: {{ ansible_distribution_major_version }}"
+          - "Primary IP: {{ ansible_default_ipv4.address }}"
+          - "OS Family: {{ ansible_os_family }}"
+          - "Inventory Name: {{ inventory_hostname }}"
