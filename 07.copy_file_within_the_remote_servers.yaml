@@ -1,7 +1,7 @@
 ---
  - name: copy the files with in the remote servers
+   hosts: all
    become: yes
-   gathering_facts: yes
    tasks:
     - name: creating the file in the remote servers
       ansible.builtin.file:
@@ -10,7 +10,9 @@
 
     - name: copying file from one loaction to another location
       ansible.builtin.shell:
-        /home/ec2-user/test_file.yaml /tmp
+        src: /home/ec2-user/test_file.yaml
+        dest: /tmp
+        remote_src: yes
 
         
              
